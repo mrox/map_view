@@ -20,7 +20,7 @@ function App() {
   const [polygons, setPolygons] = useState(new Map())
   const [showResult, setShowResult] = useState(false)
   const [locations, setLocations] = useState(new Map())
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(0)
   const [showPolygon, setShowPolygon] = useState();
   const [isLogin, setIslogin] = useState(false);
   const [username, setUsername] = useState();
@@ -47,7 +47,7 @@ function App() {
 
   const getData = async () => {
     try {
-     
+
       let ls = await API.getLocations()
 
       let m = new Map()
@@ -70,12 +70,12 @@ function App() {
 
   useEffect(async () => {
     console.log("effect");
-    if(localStorage.getItem('username')){
-     
+    if (localStorage.getItem('username')) {
+
       await onLogin(localStorage.getItem('username'), localStorage.getItem('password'))
       await getData()
     }
-    
+
   }, [])
 
 
@@ -93,6 +93,7 @@ function App() {
         p: JSON.parse(polygonData).map(d => [d.lat, d.lng]),
       }
     );
+
     console.log(`showPolygon:${v}`);
     // console.log(v);
   }
@@ -120,7 +121,7 @@ function App() {
   const onClearPolygon = () => {
     setPolygons(new Map())
   }
-  const onLogin = async (u,p) => {
+  const onLogin = async (u, p) => {
     try {
       await API.login(u, p)
       localStorage.setItem('username', u)
@@ -163,7 +164,7 @@ function App() {
                   <List dense>
                     {[...locations.keys()].map(k => (
                       <ListItem key={k}>
-                        <ListItemButton  >
+                        <ListItemButton onClick={() => viewPolygon(k)} >
                           <ListItemIcon>
                             {!locations.get(k).beaconId ?
                               <InsightsIcon size='small' /> : <BluetoothIcon size='small' color="primary" />

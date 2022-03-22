@@ -117,13 +117,17 @@ function MapLL({ center, changePolygons, viewPolygon }) {
         console.log(`onCreatePoly: ${e}`);
     }
     return (
+
         <SMapContainer
+        
             // ref={mapRef}
             // whenCreated={ mapInstance => { mapRef.current = mapInstance } }
             whenCreated={setMap}
             center={center}
             zoom={6}
-            maxZoom={18}>
+            maxZoom={18}
+            key={viewPolygon? viewPolygon.id:1}
+            >
             {viewPolygon && <ChangeView position={viewPolygon.p} />}
 
 

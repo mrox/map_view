@@ -3,11 +3,11 @@ const USERNAME = 'username'
 const PASSWORD = 'password';
 class API {
     constructor() {
-        this.baseURL = '//uat-api-web-mba.vinhomes.vn'
         this.username = localStorage.getItem(USERNAME);
         this.password = localStorage.getItem(PASSWORD)
         this.axios = axios.create({
-            baseURL: '//uat-api-web-mba.vinhomes.vn'
+            // baseURL: '//uat-api-web-mba.vinhomes.vn'
+            baseURL: '//api-web.vinhomes.vn'
             // baseURL: '//localhost:5000'
         })
     }
